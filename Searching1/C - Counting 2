@@ -1,0 +1,44 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+
+int nearest(int m,int arr[],int target){
+    int s=0,e=m-1;
+    int mid=s+(e-s)/2;
+    while(s<=e){
+        if(arr[mid]<target && arr[mid+1]>=target){
+            return mid+1;
+        }
+        if(arr[mid]>target){
+            e-mid-1;
+        }
+        else
+        {
+            s=mid+1;
+        }
+        mid=s+(e-s)/2;
+    }
+    return -1;
+}
+
+int main(){
+    int m,n;
+    cin>>m;
+    cin>>n;
+    int arr[m];
+    int query[n];
+    for(int i=0;i<m;i++){
+        cin>>arr[i];
+    }
+    sort(arr,arr+m);
+    for(int i=0;i<n;i++){
+        cin>>query[i];
+    }
+    
+    for(int i=0;i<n;i++){
+        int p=query[i];
+        int q=nearest(m,arr,p);
+        cout<<m-q<<endl;
+    }
+    
+}
